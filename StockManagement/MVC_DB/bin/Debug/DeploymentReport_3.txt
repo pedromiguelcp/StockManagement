@@ -1,0 +1,33 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[Material]
+       [dbo].[Provider]
+       [dbo].[Section]
+       [dbo].[StockMaterial]
+       [dbo].[Supply]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Drop
+       unnamed constraint on [dbo].[Material] (Default Constraint)
+       unnamed constraint on [dbo].[Provider] (Default Constraint)
+       unnamed constraint on [dbo].[Provider] (Default Constraint)
+       unnamed constraint on [dbo].[Provider] (Default Constraint)
+       unnamed constraint on [dbo].[Provider] (Default Constraint)
+       unnamed constraint on [dbo].[StockMaterial] (Default Constraint)
+       unnamed constraint on [dbo].[StockMaterial] (Default Constraint)
+       unnamed constraint on [dbo].[Supply] (Default Constraint)
+       unnamed constraint on [dbo].[Supply] (Default Constraint)
+     Table rebuild
+       [dbo].[Material] (Table)
+       [dbo].[Provider] (Table)
+       [dbo].[Section] (Table)
+       [dbo].[StockMaterial] (Table)
+       [dbo].[Supply] (Table)
+
+** Supporting actions

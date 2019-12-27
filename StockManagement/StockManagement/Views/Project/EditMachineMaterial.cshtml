@@ -1,0 +1,132 @@
+﻿@model StockManagement.Models.MachineMaterialModel
+
+@{
+    if (ViewBag.Message == "MachineMaterial not edited")
+    {
+        <div class="alert alert-warning" role="alert">
+            <button type="button" class="close" style="color:red" data-dismiss="alert">
+                x
+            </button>
+            This Material name already exist, please choose a diferent one!
+        </div>
+        ViewBag.Message = "";
+    }
+    ViewBag.Title = "EditMachineMaterial";
+}
+
+<h2>Edit Material</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_Material, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <h4>@DataLibrary.BusinessLogic.MaterialProcessor.LoadMaterialById(Model.Id_Material).Name_Material</h4>
+                @Html.ValidationMessageFor(model => model.Id_Material, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_Provider, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Id_Provider,
+                       new SelectList(DataLibrary.BusinessLogic.ProvideMaterialsProcessor.LoadProvidersByMaterial(Model.Id_Material)
+                       .OrderBy(x => x.Name_Provider), "Id_Provider", "Name_Provider"), "< Select >",
+                       new { @class = "form-control", @onchange = "CallChangefunc1()", @id = "provider" })
+                @Html.ValidationMessageFor(model => model.Id_Provider, "", new { @class = "text-danger" })
+
+
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount_Material, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount_Material, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount_Material, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MissingMaterial, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MissingMaterial, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MissingMaterial, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UnitCost_Material, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UnitCost_Material, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @id = "unitcost" } })
+                @Html.ValidationMessageFor(model => model.UnitCost_Material, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Observations, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Observations, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Observations, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Request, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Request, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Request, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a href="@Url.Action("BacktoMachine", "Project")" class="btn btn-default btn-md">
+                <i class="fas fa-arrow-left"></i>
+                <span>Discard</span>
+            </a>
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+<script>
+    function CallChangefunc1() {
+        debugger;
+            var Id_Provider = $('#provider').val();
+            var Id_Material = @Model.Id_Material;
+
+
+            $.ajax({
+
+                url: "/Project/ReturnUnitCostByid",
+
+                type: "GET",
+
+                data: {Id_Material : Id_Material, Id_Provider: Id_Provider },
+
+                dataType: "json",
+
+                success: function (data) {
+
+                        $('#unitcost').val(data);
+
+                },
+
+            });
+        }
+
+</script>

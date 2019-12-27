@@ -1,0 +1,50 @@
+﻿@model IEnumerable<StockManagement.Models.ViewMachineModel>
+
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Name_Machine)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Description_Machine)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.TotalCost_Machine)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Name_Project)
+            </th>
+            <th style="text-align:center"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Name_Machine)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Description_Machine)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.TotalCost_Machine)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Name_Project)
+                </td>
+                <td align="center">
+                    <a href="@Url.Action("EditMachine", "Machine",new {Name_Machine = item.Name_Machine})" class="btn btn-info btn-md">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("DeleteMachine", "Machine",new { Name_Machine = item.Name_Machine, Description_Machine = item.Description_Machine, TotalCost_Machine = item.TotalCost_Machine, Name_Project = item.Name_Project})" class="btn btn-danger btn-md">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                    <a href="@Url.Action("InfoMachine", "Machine",new { Name_Machine = item.Name_Machine})" class="btn btn-default btn-md" style="background-color:yellow">
+                        <span style="font-size: 15px; color: blue;">
+                            <i class="fas fa-info"></i>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>

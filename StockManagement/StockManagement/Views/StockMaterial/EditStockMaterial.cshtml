@@ -1,0 +1,155 @@
+﻿@model StockManagement.Models.StockMaterialModel
+
+@{
+    if (ViewBag.Message == "StockMaterial not edited")
+    {
+        <div class="alert alert-warning" role="alert">
+            <button type="button" class="close" style="color:red" data-dismiss="alert">
+                x
+            </button>
+            This Material already exist in Stock!
+        </div>
+        ViewBag.Message = "";
+    }
+    ViewBag.Title = "Edit Stock Material";
+}
+
+<h2>Edit Material</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_Section, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Id_Section, new SelectList(DataLibrary.BusinessLogic.SectionProcessor.LoadSections().OrderBy(x => x.Name_Section), "Id_Section", "Name_Section"), "< select section >", new { @class = "form-control", @onchange = "CallChangefunc()", @id = "section_id" })
+                @Html.ValidationMessageFor(model => model.Id_Section, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_Material, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Id_Material, new SelectList(DataLibrary.BusinessLogic.MaterialProcessor.LoadMaterialsBySection(Model.Id_Section).OrderBy(x => x.Name_Material), "Id_Material", "Name_Material"), "< select material >", new { @class = "form-control", @id = "material_id", @onchange = "CallChangefunc1()" })
+                @Html.ValidationMessageFor(model => model.Id_Material, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_Provider, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.Id_Provider, new SelectList(DataLibrary.BusinessLogic.ProvideMaterialsProcessor.LoadProvidesByMaterial(Model.Id_Material).OrderBy(x => x.Name_Provider), "Id_Provider", "Name_Provider"), "< select provider >", new { @class = "form-control", @id = "provider_id" })
+                @Html.ValidationMessageFor(model => model.Id_Provider, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount_Material, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount_Material, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount_Material, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Observations, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Observations, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nada a acrescentar" } })
+                @Html.ValidationMessageFor(model => model.Observations, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a href="@Url.Action("ViewStockMaterial", "StockMaterial")" class="btn btn-default btn-md">
+                <i class="fas fa-arrow-left"></i>
+                <span>Discard</span>
+            </a>
+            <input type="submit" value="Edit" class="btn btn-success" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+
+        function CallChangefunc() {
+            $('#material_id').empty();
+            $('#material_id').append($('<option></option>').val("").html("< select material >"));
+
+            var Id_Section = $('#section_id').val();
+
+            $.ajax({
+
+                url: "/StockMaterial/ReturnSectionMaterials",
+
+                type: "GET",
+
+                data: { Id_Section: Id_Section },
+
+                dataType: "json",
+
+                success: function (data) {
+
+                    $.each(data, function (i, val) {
+
+                        $('#material_id').prop('disabled', false);
+
+                        $('#material_id').append(
+
+                            $("<option></option>").val(val.Id_Material).html(val.Name_Material)
+
+                        );
+
+                    });
+
+                },
+
+            });
+        }
+
+        function CallChangefunc1() {
+            $('#provider_id').empty();
+            $('#provider_id').append($('<option></option>').val("").html("< select provider >"));
+
+            var Id_Material = $('#material_id').val();
+
+            $.ajax({
+
+                url: "/StockMaterial/ReturnMaterialProviders",
+
+                type: "GET",
+
+                data: { Id_Material: Id_Material },
+
+                dataType: "json",
+
+                success: function (data) {
+
+                    $.each(data, function (i, val) {
+
+                        $('#provider_id').prop('disabled', false);
+
+                        $('#provider_id').append(
+
+                            $("<option></option>").val(val.Id_Provider).html(val.Name_Provider)
+
+                        );
+
+                    });
+
+                },
+
+            });
+
+        }
+
+    </script>
+
+}

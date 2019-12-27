@@ -1,0 +1,54 @@
+﻿@model IEnumerable<StockManagement.Models.ViewSupplyModel>
+
+
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Request)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.SupplyOrder)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Name_Provider)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.TotalPrice_Supply)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Date_Supply)
+        </th>
+        <th style="text-align:center"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Request)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.SupplyOrder)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Name_Provider)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.TotalPrice_Supply)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Date_Supply)
+            </td>
+            <td align="center">
+                <a href="@Url.Action("DetailsSupply", "Supply",new {Request = item.Request })" class="btn btn-info btn-md">
+                    <i class="fas fa-question"></i>
+                </a>
+                <a href="@Url.Action("DeleteSupply", "Supply",new {Request = item.Request, Name_Provider = item.Name_Provider, TotalPrice_Supply = item.TotalPrice_Supply, Date_Supply = item.Date_Supply })" class="btn btn-danger btn-md">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,367 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div style="text-align:center; margin:100px 0px 120px 0px">
+
+        <div class="glyphicon-text-color"><h1><strong>STOCK MANAGEMENT</strong></h1></div>
+
+        <div style="margin:40px 0px 100px 0px">
+
+            <ul class="list-inline">
+                <li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("ViewProviders", "Provider")" class="list-group-item" id="item0">
+                            <p id="hid0" class="lead" style="color:#234a6f; margin:15px 0px 0px 0px; font-size:14pt"><strong>Providers</strong></p>
+                            <hr id="hr0" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px">
+                            <p class="lead" style="font-size:14pt">Manage Providers</p>
+                        </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("ViewSections", "Section")" class="list-group-item" id="item1">
+                            <p id="hid1" class="lead" style="color:#234a6f; margin:15px 0px 0px 0px; font-size:14pt"><strong>Sections</strong></p>
+                            <hr id="hr1" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px">
+                            <p class="lead" style="font-size:14pt">Manage Sections</p>
+                        </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("ViewMaterials", "Material")" class="list-group-item" id="item2">
+                            <p id="hid2" class="lead" style="color:#234a6f; margin:15px 0px 0px 0px; font-size:14pt"><strong>Materials</strong></p>
+                            <hr id="hr2" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px">
+                            <p class="lead" style="font-size:14pt">Manage Materials</p>
+                        </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("ViewSupplys", "Supply")" class="list-group-item" id="item3">
+                            <p id="hid3" class="lead" style="color:#234a6f; margin:15px 0px 0px 0px; font-size:14pt"><strong>Supplys</strong></p>
+                            <hr id="hr3" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px;">
+                            <p class="lead" style="font-size:14pt">Manage Supplys</p>
+                        </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("ViewStockMaterial", "StockMaterial")" class="list-group-item" id="item4">
+                            <p id="hid4" class="lead" style="color:#234a6f; margin:15px 0px 0px 0px; font-size:14pt"><strong>StockMaterials</strong></p>
+                            <hr id="hr4" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px">
+                            <p class="lead" style="font-size:14pt">Manage StockMaterials</p>
+                        </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("ViewIntegrators", "Integrator")" class="list-group-item" id="item5">
+                            <p id="hid5" class="lead" style="color:#234a6f; margin:15px 0px 0px 0px; font-size:14pt"><strong>Integrators</strong></p>
+                            <hr id="hr5" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px">
+                            <p class="lead" style="font-size:14pt">Manage Integrators</p>
+                        </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("ViewProjects", "Project")" class="list-group-item" id="item6">
+                            <p id="hid6" class="lead" style="color:#234a6f; margin:15px 0px 0px 0px; font-size:14pt"><strong>Projects</strong></p>
+                            <hr id="hr6" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px">
+                            <p class="lead" style="font-size:14pt">Manage Projects</p>
+                        </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("ViewMachines", "Machine")" class="list-group-item" id="item7">
+                            <p id="hid7" class="lead" style="color:#234a6f; margin:15px 0px 0px 0px; font-size:14pt"><strong>Machines</strong></p>
+                            <hr id="hr7" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px">
+                            <p class="lead" style="font-size:14pt">Manage Machines</p>
+                        </a>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("Index", "Home")" class="list-group-item" id="item8">
+                            <p id="hid8" class="lead" style="color:gray; margin:15px 0px 0px 0px; font-size:14pt"><strong>Sales</strong></p>
+                            <hr id="hr8" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px">
+                            <p class="lead" style="font-size:14pt">Manage Sales</p>
+                        </a>
+
+                    </div>
+                </li>
+                @*<li>
+                    <div class="list-group" style="min-width:180px">
+
+                        <a href="@Url.Action("ViewQuotations", "Quotation")" class="list-group-item" id="item9">
+                            <p id="hid9" class="lead" style="color:#234a6f; margin:15px 0px 0px 0px; font-size:14pt"><strong>Quotations</strong></p>
+                            <hr id="hr9" style="border-top: 1px solid #ebebeb; margin-top:5px; margin-bottom:5px">
+                            <p class="lead" style="font-size:14pt">Manage Quotations</p>
+                        </a>
+
+                    </div>
+                </li>*@
+            </ul>
+            <p id="pTest" class="lead" style="color:steelblue; margin:0px">&nbsp;</p>
+        </div>
+    </div>
+
+
+@section Scripts
+{
+    <script>
+  $(function () {
+
+    $("#item0").mouseover(
+      function () {
+        $('#pTest').text('Information about current registered Providers. You can create more or edit / delete each existent Provider.');
+
+        $("#item0").css("background-color", "whitesmoke");
+
+        $("#item0").css("border-color", "gray");
+
+        $("#hr0").css("border-color", "#bbb");
+
+      });
+
+    $("#item1").mouseover(
+      function () {
+        $('#pTest').text('Information about current registered Sections. You can create more or edit / delete each existent Section.');
+
+        $("#item1").css("background-color", "whitesmoke");
+
+        $("#item1").css("border-color", "gray");
+
+        $("#hr1").css("border-color", "#bbb");
+
+      });
+
+    $("#item2").mouseover(
+      function () {
+        $('#pTest').text('Information about current registered Materials. You can create more or edit / delete each existent Material.');
+
+        $("#item2").css("background-color", "whitesmoke");
+
+        $("#item2").css("border-color", "gray");
+
+        $("#hr2").css("border-color", "#bbb");
+
+      });
+
+    $("#item3").mouseover(
+      function () {
+        $('#pTest').text('Information about current registered Supplys. You can create more or edit / delete each existent Supply.');
+
+        $("#item3").css("background-color", "whitesmoke");
+
+        $("#item3").css("border-color", "gray");
+
+        $("#hr3").css("border-color", "#bbb");
+
+      });
+
+    $("#item4").mouseover(
+    function () {
+        $('#pTest').text('Information about current list of StockMaterials. You can create more or edit / delete each existent StockMaterial.');
+
+        $("#item4").css("background-color", "whitesmoke");
+
+        $("#item4").css("border-color", "gray");
+
+        $("#hr4").css("border-color", "#bbb");
+
+          });
+
+    $("#item5").mouseover(
+    function () {
+        $('#pTest').text('Information about current registered Integrators. You can create more or edit / delete each existent Integrator.');
+
+        $("#item5").css("background-color", "whitesmoke");
+
+        $("#item5").css("border-color", "gray");
+
+        $("#hr5").css("border-color", "#bbb");
+
+          });
+
+    $("#item6").mouseover(
+    function () {
+        $('#pTest').text('Information about current registered Projects. You can create more or edit / delete each existent Project.');
+
+        $("#item6").css("background-color", "whitesmoke");
+
+        $("#item6").css("border-color", "gray");
+
+        $("#hr6").css("border-color", "#bbb");
+
+        });
+
+    $("#item7").mouseover(
+    function () {
+        $('#pTest').text('Information about current registered Machines. You can create more or edit / delete each existent Machine.');
+
+        $("#item7").css("background-color", "whitesmoke");
+
+        $("#item7").css("border-color", "gray");
+
+        $("#hr7").css("border-color", "#bbb");
+
+        });
+
+   @* $("#item8").mouseover(
+    function () {
+        $('#pTest').text('Information about current registered Sales. You can create more or edit / delete each existent Sale.');
+
+        $("#item8").css("background-color", "whitesmoke");
+
+        $("#item8").css("border-color", "gray");
+
+        $("#hr8").css("border-color", "#bbb");
+
+          });
+       *@
+
+//$("#item9").mouseover(
+//    function () {
+//        $('#pTest').text('Information about current registered Quotations for each Provider. You can update / delete each existent Quotation.');
+
+//        $("#item9").css("background-color", "whitesmoke");
+
+//        $("#item9").css("border-color", "gray");
+
+//        $("#hr9").css("border-color", "#bbb");
+
+//    });
+
+      $("#item0").mouseout(
+      function () {
+        $('#pTest').text('');
+        $("#item0").css("background-color", "white");
+
+        $("#item0").css("border-color", "#ddd");
+
+        $("#hr0").css("border-color", "#ddd");
+
+        });
+
+      $("#item1").mouseout(
+      function () {
+        $('#pTest').text('');
+        $("#item1").css("background-color", "white");
+
+        $("#item1").css("border-color", "#ddd");
+
+        $("#hr1").css("border-color", "#ddd");
+
+          });
+
+      $("#item2").mouseout(
+      function () {
+        $('#pTest').text('');
+        $("#item2").css("background-color", "white");
+
+        $("#item2").css("border-color", "#ddd");
+
+        $("#hr2").css("border-color", "#ddd");
+
+          });
+
+      $("#item3").mouseout(
+      function () {
+        $('#pTest').text('');
+        $("#item3").css("background-color", "white");
+
+        $("#item3").css("border-color", "#ddd");
+
+        $("#hr3").css("border-color", "#ddd");
+
+          });
+
+      $("#item4").mouseout(
+      function () {
+        $('#pTest').text('');
+        $("#item4").css("background-color", "white");
+
+        $("#item4").css("border-color", "#ddd");
+
+        $("#hr4").css("border-color", "#ddd");
+
+          });
+
+      $("#item5").mouseout(
+      function () {
+        $('#pTest').text('');
+        $("#item5").css("background-color", "white");
+
+        $("#item5").css("border-color", "#ddd");
+
+        $("#hr5").css("border-color", "#ddd");
+
+          });
+
+      $("#item6").mouseout(
+      function () {
+        $('#pTest').text('');
+        $("#item6").css("background-color", "white");
+
+        $("#item6").css("border-color", "#ddd");
+
+        $("#hr6").css("border-color", "#ddd");
+
+          });
+
+      $("#item7").mouseout(
+      function () {
+        $('#pTest').text('');
+        $("#item7").css("background-color", "white");
+
+        $("#item7").css("border-color", "#ddd");
+
+        $("#hr7").css("border-color", "#ddd");
+
+          });
+
+     @* $("#item8").mouseout(
+      function () {
+        $('#pTest').text('');
+        $("#item8").css("background-color", "white");
+
+        $("#item8").css("border-color", "#ddd");
+
+        $("#hr8").css("border-color", "#ddd");
+
+          });*@
+
+      //$("#item9").mouseout(
+      //function () {
+      //  $('#pTest').text('');
+      //  $("#item9").css("background-color", "white");
+
+      //  $("#item9").css("border-color", "#ddd");
+
+      //  $("#hr9").css("border-color", "#ddd");
+
+      //    });
+  });
+    </script>
+}

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<StockManagement.Models.ViewStockMaterialModel>
+
+    <table class="table table-bordered table-striped table-hover" id="otherid">
+        <tr>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Name_Section)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Name_Provider)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Name_Material)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Amount_Material)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.Observations)
+            </th>
+            <th style="text-align:center"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Name_Section)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Name_Provider)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Name_Material)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Amount_Material)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Observations)
+                </td>
+                <td align="center">
+                    <a href="@Url.Action("EditStockMaterial", "StockMaterial",new {Name_Provider = item.Name_Provider, Name_Material = item.Name_Material, Name_Section = item.Name_Section, Amount_Material = item.Amount_Material, Observations = item.Observations })" class="btn btn-info btn-md">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("DeleteStockMaterial", "StockMaterial",new { Name_Provider = item.Name_Provider, Name_Material = item.Name_Material , Name_Section = item.Name_Section})" class="btn btn-danger btn-md">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+
+                </td>
+            </tr>
+        }
+
+    </table>

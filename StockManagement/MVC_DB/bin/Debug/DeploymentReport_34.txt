@@ -1,0 +1,49 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Integrator] (Table)
+       [dbo].[Machine] (Table)
+       [dbo].[MachineMaterial] (Table)
+       [dbo].[Material] (Table)
+       [dbo].[Project] (Table)
+       [dbo].[ProvideMaterials] (Table)
+       [dbo].[Provider] (Table)
+       [dbo].[Quotation] (Table)
+       [dbo].[Sale] (Table)
+       [dbo].[Section] (Table)
+       [dbo].[StockMaterial] (Table)
+       [dbo].[Supply] (Table)
+       Default Constraint: unnamed constraint on [dbo].[Integrator] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Integrator] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Integrator] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Integrator] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Machine] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Machine] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[MachineMaterial] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[MachineMaterial] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[MachineMaterial] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[MachineMaterial] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[MachineMaterial] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[MachineMaterial] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Material] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Material] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Project] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Project] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Provider] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Provider] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Provider] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Provider] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Section] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[StockMaterial] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[StockMaterial] (Default Constraint)
+
+** Supporting actions

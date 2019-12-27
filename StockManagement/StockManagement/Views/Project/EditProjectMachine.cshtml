@@ -1,0 +1,175 @@
+﻿@model StockManagement.Models.ProjectMachineMaterialModel
+
+@{
+    if (ViewBag.Message == "Machine not edited")
+    {
+        <div class="alert alert-warning" role="alert">
+            <button type="button" class="close" style="color:red" data-dismiss="alert">
+                x
+            </button>
+            This Machine name already exist, please choose a diferent one!
+        </div>
+        ViewBag.Message = "";
+    }
+    else if (ViewBag.Message == "No Quotation up to date!")
+    {
+<div class="alert alert-danger" role="alert">
+    <button type="button" class="close" style="color:red" data-dismiss="alert">
+        x
+    </button>
+    No Quotation can be used for this Provider. No Quotation up to date!!
+</div>
+        ViewBag.Message = "";
+    }
+    ViewBag.Title = "Edit ProjectMachine";
+}
+
+<h2>Edit Machine</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.MachineModel.Name_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MachineModel.Name_Machine, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MachineModel.Name_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MachineModel.Description_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MachineModel.Description_Machine, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nada a registar" } })
+                @Html.ValidationMessageFor(model => model.MachineModel.Description_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MachineModel.TotalCost_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MachineModel.TotalCost_Machine, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MachineModel.TotalCost_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div align="center">
+
+            <input type="submit" style="border-color:forestgreen" value="Include Materials to Machine" class="btn btn-group-justified" formaction="@Url.Action("IncludeMachinesMaterialsAux", "Project")" />
+        </div>
+        <br />
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Id_Provider)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Name_Material)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Amount_Material)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Unit_Cost)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Cost_Material)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].MissingMaterial)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Observations)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Request)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Priority)
+                </th>
+                <th style="text-align:center"></th>
+            </tr>
+
+            @foreach (var item in Model.ViewMachineMaterialModel)
+            {
+                <tr>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => DataLibrary.BusinessLogic.ProviderProcessor.LoadProviderById(item.Id_Provider).Name_Provider)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.Name_Material)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.Amount_Material)
+                    </td>
+                    <td align="center">
+                        @*@Html.DisplayFor(modelItem => item.Unit_Cost)*@
+                        <a href="@Url.Action("SeeQuotationFile", "Project", new { Id_Provider = item.Id_Provider, Id_Material = DataLibrary.BusinessLogic.MaterialProcessor.LoadMaterialByName(item.Name_Material).Id_Material})" target="_blank" >@Html.DisplayFor(modelItem => item.Unit_Cost)</a>
+                    
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.Cost_Material)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.MissingMaterial)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.Observations)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.Request)
+                    </td>
+                    @if (item.Priority == true)
+                    {
+                        <td align="center">
+                            <i class="fas fa-check fa-1x" style="color:green"></i>
+                        </td>
+                    }
+                    else
+                    {
+                        <td align="center">
+                            <i class="fas fa-times fa-1x" style="color:red"></i>
+                        </td>
+                    }
+
+                    <td align="center">
+                        <a href="@Url.Action("EditMachineMaterial", "Project", new {Name_Material = item.Name_Material})" title="Edit Material" class="btn btn-info btn-md">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a href="@Url.Action("DeleteMachineMaterial", "Project", new { Name_Material = item.Name_Material})" title="Delete Material" class="btn btn-danger btn-md">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                        <a href="@Url.Action("AskRequest", "Project", new { Id_Provider = item.Id_Provider})" title="Request Offer" class="btn btn-primary btn-md">
+                            <i class="fas fa-clipboard-list"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <hr />
+        <div class="form-group">
+            <a href="@Url.Action("DiscardEditMachine", "Project")" class="btn btn-default btn-md">
+                <i class="fas fa-arrow-left"></i>
+                <span>Discard</span>
+            </a>
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+
+            // This will automatically grab the 'title' attribute and replace
+            // the regular browser tooltips for all <a> elements with a title attribute!
+            $('a[title]').qtip();
+
+        });
+    </script>
+}

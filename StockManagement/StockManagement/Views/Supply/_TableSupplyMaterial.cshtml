@@ -1,0 +1,46 @@
+﻿@model  StockManagement.Models.ListSupplyMaterialModelPartial
+
+
+    <table class="table table-bordered table-striped table-hover" id="tableid">
+        <tr>
+            <th style="text-align:center">
+                Include
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.ViewSupply_Model[0].Name_Material)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.ViewSupply_Model[0].Specs_Material)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.ViewSupply_Model[0].Amount_Material)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.ViewSupply_Model[0].TotalPrice_Material)
+            </th>
+        </tr>
+        <tbody>
+            @for (int i = 0; i < Model.ViewSupply_Model.Count(); i++)
+            {
+                <tr>
+                    <td align="center">
+                        @Html.CheckBoxFor(m => m.ViewSupply_Model[i].Check, new { @class = "form-control" })
+                    </td>
+                    <td align="center">
+                        @Html.EditorFor(m => m.ViewSupply_Model[i].Name_Material, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    </td>
+                    <td align="center">
+                        @Html.EditorFor(m => m.ViewSupply_Model[i].Specs_Material, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    </td>
+                    <td align="center">
+                        @Html.EditorFor(m => m.ViewSupply_Model[i].Amount_Material, new { @class = "form-control" })
+                    </td>
+                    <td align="center">
+                        @Html.EditorFor(m => m.ViewSupply_Model[i].TotalPrice_Material,  new { htmlAttributes = new { @class = "form-control", @readonly = "readonly"} })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+

@@ -1,0 +1,20 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Rename
+       [dbo].[Machine].[Id_Section] (Column)
+     Alter
+       [dbo].[Machine] (Table)
+       [dbo].[MachineMaterial] (Table)
+     Create
+       Default Constraint: unnamed constraint on [dbo].[Machine] (Default Constraint)
+
+** Supporting actions

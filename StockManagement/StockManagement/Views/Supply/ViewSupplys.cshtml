@@ -1,0 +1,71 @@
+﻿@model IEnumerable<StockManagement.Models.ViewSupplyModel>
+
+@{
+    ViewBag.Title = "List of Supplys";
+}
+
+<h2>List of Supplys</h2>
+
+<a href="@Url.Action("CreateSupply", "Supply")" class="btn btn-success btn-md">
+    <i class="fas fa-plus"></i>
+    <span>New</span>
+</a>
+
+
+<br />
+<br />
+<h4>
+    <i class="fas fa-filter fa-1x"></i>
+    Request Number
+</h4>
+<input id="inputDatabaseName" class="form-control" onchange="onchangeevent();"
+       onkeyup="this.onchange();"   />
+
+<div class="AproxExact" id="radios" onchange="onchangeevent1();">
+    Approximately: @Html.RadioButton("sortmethod", "Approximately", new { @checked = true})
+    Exactly:   @Html.RadioButton("sortmethod", "Exactly")
+</div>
+
+    <br />
+    <br />
+    <div id="partial">
+        @{ Html.RenderAction("_TableSupplys", Model);}
+    </div>
+
+    <a href="@Url.Action("Index", "Home")" class="btn btn-default btn-md">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back</span>
+    </a>
+
+    <script>
+        function onchangeevent() {
+            debugger;
+            var id = $('#inputDatabaseName').val();
+            var checkedRadio = $('#radios :radio:checked').val();
+            $.ajax({
+                url: "/Supply/_TableSupplysaux?id=" + id + "&id1=" + checkedRadio,
+                type: "POST",
+                data: '{"id":"' + id + '"}',
+                success: function (data) {
+                    $("#partial").html(data);
+                }
+            });
+        }
+
+        function onchangeevent1() {
+            debugger;
+            var id = $('#inputDatabaseName').val();
+            var checkedRadio = $('#radios :radio:checked').val();
+            $.ajax({
+                url: "/Supply/_TableSupplysaux?id=" + id + "&id1=" + checkedRadio,
+                type: "POST",
+                data: '{"id":"' + id + '"}',
+                success: function (data) {
+                    $("#partial").html(data);
+                }
+            });
+        }
+
+
+
+    </script>

@@ -1,0 +1,61 @@
+﻿@model  StockManagement.Models.ListSupplyMaterialModelPartial
+
+@{
+    if (ViewBag.Message == "Material not included")
+    {
+        <div class="alert alert-warning" role="alert">
+            <button type="button" class="close" style="color:red" data-dismiss="alert">
+                x
+            </button>
+            This Material name already exist in the Supply, please choose a diferent one!
+        </div>
+        ViewBag.Message = "";
+    }
+    ViewBag.Title = "CreateMachineMaterial";
+}
+
+<h2>Include Materials</h2>
+<br />
+<br />
+
+@Html.DropDownList("Sortby", new SelectList(DataLibrary.BusinessLogic.SectionProcessor.LoadSections().OrderBy(x => x.Name_Section), "Id_Section", "Name_Section"), "< Filter by Section >", new { @class = "form-control", @onchange = "CallChangefunc(this.Id_Section)" })
+
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div id="partial">
+        @{ Html.RenderAction("_TableSupplyMaterial", Model);}
+    </div>
+
+    <div class="form-group">
+
+        <a href="@Url.Action("Back", "Supply")" class="btn btn-default btn-md">
+            <i class="fas fa-arrow-left"></i>
+            <span>Discard</span>
+        </a>
+        <input type="submit" value="Include" class="btn btn-success" />
+    </div>
+}
+
+<script>
+    function CallChangefunc(val) {
+        //debugger;
+        var id = $("#Sortby").val();
+        $.ajax({
+            url: "/Supply/_TableSupplyMaterialaux?id=" + id,
+            type: "POST",
+            data: '{"id":"' + id + '"}',
+            success: function (data) {
+                $("#partial").html(data);
+            }
+        });
+    }
+
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

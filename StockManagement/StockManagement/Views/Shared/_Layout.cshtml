@@ -1,0 +1,64 @@
+﻿    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:ghostwhite">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <h3>Stock Management Application </h3>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-group btn-lg">
+                    <i class="fas fa-home"></i>
+                    <span>HOME</span>
+                </a>
+                <a href="@Url.Action("Index", "Home")" class="btn btn-group btn-lg" style="color:red">
+                    <i class="far fa-question-circle"></i>
+                    <span>HELP</span>
+                </a>
+                <div class="navbar-collapse collapse">
+                    <div style="margin:-100px -600px 0px 1100px">
+                        <div class="img">
+                            <img src="~/Images/Preh_Logo.png" height="100" class="rounded fa-long-arrow-alt-right" width="300">
+                        </div>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Providers", "ViewProviders", "Provider")</li>
+                <li>@Html.ActionLink("Sections", "ViewSections", "Section")</li>
+                <li>@Html.ActionLink("Materials", "ViewMaterials", "Material")</li>
+                <li>@Html.ActionLink("Supplys", "ViewSupplys", "Supply")</li>
+                <li>@Html.ActionLink("StockMaterial", "ViewStockMaterial", "StockMaterial")</li>*@
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container body-content" style="margin:50px 0px 0px 250px">
+            @RenderBody()
+            <div style="bottom:0; width:100%;">
+                <hr style="width:100%;" />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Stock Management Application </p>
+                </footer>
+            </div>
+
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
+

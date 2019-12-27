@@ -1,0 +1,70 @@
+﻿@model StockManagement.Models.MachineModel
+
+@{
+    if (ViewBag.Message == "Machine not created")
+    {
+    <div class="alert alert-warning" role="alert">
+        <button type="button" class="close" style="color:red" data-dismiss="alert">
+            x
+        </button>
+        This Machine name already exist, please choose a diferent one!
+    </div>
+    ViewBag.Message = "";
+    }
+    ViewBag.Title = "Create New Machine";
+}
+
+<h2>Machine Features</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name_Machine, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description_Machine, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nada a registar" } })
+                @Html.ValidationMessageFor(model => model.Description_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalCost_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TotalCost_Machine, new { htmlAttributes = new { @class = "form-control", @Value = "0", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.TotalCost_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_Project, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Id_Project, new SelectList(DataLibrary.BusinessLogic.ProjectProcessor.LoadProjects().OrderBy(x => x.Name_Project), "Id_Project", "Name_Project"), "< Select >", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id_Project, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+                    <a href="@Url.Action("ViewMachines", "Machine")" class="btn btn-default btn-md">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                    </a>
+                    <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

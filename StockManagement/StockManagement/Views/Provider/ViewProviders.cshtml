@@ -1,0 +1,55 @@
+﻿@model IEnumerable<StockManagement.Models.ProviderModel>
+
+@{
+    ViewBag.Title = "List of Providers";
+}
+
+<h2>List of Providers</h2>
+
+<a href="@Url.Action("CreateProvider", "Provider")" class="btn btn-success btn-md">
+    <i class="fas fa-plus"></i>
+    <span>New</span>
+</a>
+<br />
+<br />
+<h4>
+    <i class="fas fa-filter fa-1x"></i>
+    Provider Name
+</h4>
+<input id="inputDatabaseName" class="form-control" onchange="onchangeevent();"
+       onkeyup="this.onchange();" />
+
+
+<br />
+<br />
+<div id="partial">
+    @{ Html.RenderAction("_TableProviders", Model);}
+</div>
+
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-default btn-md">
+    <i class="fas fa-arrow-left"></i>
+    <span>Back</span>
+</a>
+
+<script>
+    $(document).ready(function () {
+
+        // This will automatically grab the 'title' attribute and replace
+        // the regular browser tooltips for all <a> elements with a title attribute!
+        $('a[title]').qtip();
+
+    });
+    function onchangeevent() {
+            debugger;
+            var id = $('#inputDatabaseName').val();
+            $.ajax({
+                url: "/Provider/_TableProvidersaux?id=" + id,
+                type: "POST",
+                data: '{"id":"' + id + '"}',
+                success: function (data) {
+                    $("#partial").html(data);
+                }
+            });
+        }
+</script>

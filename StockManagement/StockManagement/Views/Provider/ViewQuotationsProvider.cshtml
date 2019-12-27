@@ -1,0 +1,69 @@
+﻿@model IEnumerable<StockManagement.Models.ViewMaterialModel>
+
+@{
+    ViewBag.Title = "ViewQuotationsProvider";
+}
+
+<h2>Provider Quotations</h2>
+<br />
+<br />
+
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Name_Section)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Name_Material)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Unit_Cost)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </th>
+        <th style="text-align:center">
+            <i class="fas fa-folder-open fa-2x"></i>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Name_Section)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Name_Material)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Unit_Cost)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.ExpirationDate)
+            </td>
+            <td align="center">
+                <a href="@Url.Action("SeeQuotationFile", "Provider",new {QuotationPath = item.QuotationPath })" target="_blank" title="See Quotation file" class="btn btn-default btn-md">
+                    <i class="far fa-file "></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<a href="@Url.Action("ViewProviders", "Provider")" class="btn btn-default btn-md">
+    <i class="fas fa-arrow-left"></i>
+    <span>Back</span>
+</a>
+
+<script>
+    $(document).ready(function () {
+
+        // This will automatically grab the 'title' attribute and replace
+        // the regular browser tooltips for all <a> elements with a title attribute!
+        $('a[title]').qtip();
+
+    });
+</script>
+

@@ -1,0 +1,66 @@
+﻿@model StockManagement.Models.IntegratorModel
+
+@{
+    ViewBag.Title = "Integrator Client";
+}
+
+    <h2>Delete Integrator</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_Integrator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_Integrator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone_Integrator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone_Integrator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mail_Integrator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mail_Integrator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address_Integrator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address_Integrator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nif_Integrator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nif_Integrator)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <a href="@Url.Action("ViewIntegrators", "Integrator")" class="btn btn-default btn-md">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back</span>
+    </a>
+    <input type="submit" value="Delete" class="btn btn-danger" />
+</div>
+    }
+</div>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StockManagement.Models.ProjectModel>
+
+@{
+    ViewBag.Title = "List of Projects";
+}
+
+<h2>List of Projects</h2>
+
+<a href="@Url.Action("CreateProject", "Project")" class="btn btn-success btn-md">
+    <i class="fas fa-plus"></i>
+    <span>New</span>
+</a>
+<br />
+<br />
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Name_Project)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.Description_Project)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayNameFor(model => model.TotalCost_Project)
+        </th>
+        <th style="text-align:center"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Name_Project)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Description_Project)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.TotalCost_Project)
+            </td>
+            <td align="center">
+                <a href="@Url.Action("EditProject", "Project",new {Name_Project = item.Name_Project })" class="btn btn-info btn-md">
+                    <i class="far fa-edit"></i>
+                </a>
+                <a href="@Url.Action("DeleteProject", "Project",new { Name_Project = item.Name_Project })" class="btn btn-danger btn-md">
+                    <i class="far fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+<a href="@Url.Action("Index", "Home")" class="btn btn-default btn-md">
+    <i class="fas fa-arrow-left"></i>
+    <span>Back</span>
+</a>

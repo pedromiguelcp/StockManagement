@@ -1,0 +1,58 @@
+﻿@model StockManagement.Models.ViewSupplyModel
+
+@{
+    ViewBag.Title = "Delete Supply";
+}
+
+<h2>Delete Supply</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Request)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Request)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplyOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplyOrder)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_Provider)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_Provider)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Supply)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Supply)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <a href="@Url.Action("ViewSupplys", "Supply")" class="btn btn-default btn-md">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back</span>
+    </a>
+    <input type="submit" value="Delete" class="btn btn-danger" />
+</div>
+    }
+</div>

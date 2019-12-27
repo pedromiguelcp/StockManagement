@@ -1,0 +1,50 @@
+﻿@model StockManagement.Models.ViewMachineModel
+
+@{
+    ViewBag.Title = "DeleteProjectMachine";
+}
+
+<h2>Delete Machine</h2>
+
+<h3>Are you sure you want to delete this Machine from the Project?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_Machine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_Machine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description_Machine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description_Machine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalCost_Machine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalCost_Machine)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <a href="@Url.Action("EditProject", "Project")" class="btn btn-default btn-md">
+        <i class="fas fa-arrow-left"></i>
+        <span>Cancel</span>
+    </a>
+    <input type="submit" value="Delete" class="btn btn-danger" />
+</div>
+    }
+</div>

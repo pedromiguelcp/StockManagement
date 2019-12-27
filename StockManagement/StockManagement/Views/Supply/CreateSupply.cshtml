@@ -1,0 +1,137 @@
+﻿@model StockManagement.Models.SupplyMaterialModel
+
+@{
+    if (ViewBag.Message == "Supply not created")
+    {
+    <div class="alert alert-warning" role="alert">
+        <button type="button" class="close" style="color:red" data-dismiss="alert">
+            x
+        </button>
+        This Supply Request already exist or is invalid, you must include materials in the supply!
+    </div>
+        ViewBag.Message = "";
+    }
+    ViewBag.Title = "Create New Supply";
+}
+
+<h2>Supply Features</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.SupplyModel.Request, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SupplyModel.Request, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.SupplyModel.Request, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.SupplyModel.SupplyOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SupplyModel.SupplyOrder, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.SupplyModel.SupplyOrder, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.SupplyModel.Id_Provider, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.ViewSupplyModel.Count() != 0)
+                {
+                        @Html.DropDownListFor(m => m.SupplyModel.Id_Provider, new SelectList(DataLibrary.BusinessLogic.ProviderProcessor.LoadProviders().Where(X => X.Id_Provider == Model.SupplyModel.Id_Provider), "Id_Provider", "Name_Provider"),  new { @class = "form-control", @readonly = "readonly" })
+                }
+                else
+                {
+                    @Html.DropDownListFor(m => m.SupplyModel.Id_Provider, new SelectList(DataLibrary.BusinessLogic.ProviderProcessor.LoadProviders().OrderBy(x => x.Name_Provider), "Id_Provider", "Name_Provider"), "< Select >", new { @class = "form-control" })
+}
+                @Html.ValidationMessageFor(m => m.SupplyModel.Id_Provider, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.SupplyModel.TotalPrice_Supply, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SupplyModel.TotalPrice_Supply, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.SupplyModel.TotalPrice_Supply, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.SupplyModel.Date_Supply, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SupplyModel.Date_Supply, new { htmlAttributes = new { @class = "form-control", @placeholder = "MM/DD/YY HH:MM:SS" } })
+                @Html.ValidationMessageFor(model => model.SupplyModel.Date_Supply, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div align="center">
+            <input type="submit" style="border-color:forestgreen" value="Associate Materials" class="btn btn-group-justified" formaction="@Url.Action("IncludeMaterialsaux", "Supply")" />
+        </div>
+
+        <br />
+
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewSupplyModel[0].Name_Section)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewSupplyModel[0].Name_Material)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewSupplyModel[0].Amount_Material)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.ViewSupplyModel[0].TotalPrice_Material)
+                </th>
+                <th style="text-align:center"></th>
+            </tr>
+
+            @foreach (var item in Model.ViewSupplyModel)
+            {
+                <tr>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.Name_Section)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.Name_Material)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.Amount_Material)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.TotalPrice_Material)
+                    </td>
+
+                    <td align="center">
+                        <a href="@Url.Action("DeleteMaterial", "Supply", new { Name_Material = item.Name_Material})" class="btn btn-danger btn-md">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+
+        <div class="form-group">
+            <a href="@Url.Action("ViewSupplys", "Supply")" class="btn btn-default btn-md">
+                <i class="fas fa-arrow-left"></i>
+                <span>Discard</span>
+            </a>
+            <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

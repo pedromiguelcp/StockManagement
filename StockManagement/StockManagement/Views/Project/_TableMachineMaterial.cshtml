@@ -1,0 +1,85 @@
+﻿@model  StockManagement.Models.ListMachineMaterialModelPartial
+
+
+    <table class="table table-bordered table-striped table-hover" id="tableid">
+        <tr>
+            <th style="text-align:center">
+                Include
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.MachineMaterialModelPartialDetails[0].Name_Material)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.MachineMaterialModelPartialDetails[0].Specs_Material)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.MachineMaterialModelPartialDetails[0].Id_Provider)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.MachineMaterialModelPartialDetails[0].Amount_Material)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.MachineMaterialModelPartialDetails[0].CostUnit_Material)
+            </th>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.MachineMaterialModelPartialDetails[0].Observations)
+            </th>
+        </tr>
+        <tbody>
+            @for (int i = 0; i < Model.MachineMaterialModelPartialDetails.Count(); i++)
+            {
+                <tr>
+                    <td align="center">
+                        @Html.CheckBoxFor(m => m.MachineMaterialModelPartialDetails[i].Check, new { @class = "form-control" })
+                    </td>
+                    <td align="center">
+                        @Html.EditorFor(m => m.MachineMaterialModelPartialDetails[i].Name_Material, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" , @id = "material"} })
+                    </td>
+                    <td align="center">
+                        @Html.EditorFor(m => m.MachineMaterialModelPartialDetails[i].Specs_Material, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                    </td>
+                    <td align="center">
+                        @Html.DropDownListFor(m => m.MachineMaterialModelPartialDetails[i].Id_Provider, 
+                       new SelectList(DataLibrary.BusinessLogic.ProvideMaterialsProcessor.LoadProvidersByMaterial(DataLibrary.BusinessLogic.MaterialProcessor.LoadMaterialByName(Model.MachineMaterialModelPartialDetails[i].Name_Material).Id_Material)
+                       .OrderBy(x => x.Name_Provider), "Id_Provider", "Name_Provider"), "< Select >", new { @class = "form-control", @onchange = "CallChangefunc1()", @id = "provider" })
+                    </td>
+                    <td align="center">
+                        @Html.EditorFor(m => m.MachineMaterialModelPartialDetails[i].Amount_Material, new { @class = "form-control" })
+                    </td>
+                    <td align="center">
+                        @Html.EditorFor(m => m.MachineMaterialModelPartialDetails[i].CostUnit_Material, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" , @id = "unitcost" } })
+                    </td>
+                    <td align="center">
+                        @Html.EditorFor(m => m.MachineMaterialModelPartialDetails[i].Observations, new { @class = "form-control" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <script>
+        function CallChangefunc1() {
+            var Id_Provider = $('#provider').val();
+            var Name_Material = $('#material').val();
+
+
+            $.ajax({
+
+                url: "/Project/ReturnUnitCost",
+
+                type: "GET",
+
+                data: {Name_Material : Name_Material, Id_Provider: Id_Provider },
+
+                dataType: "json",
+
+                success: function (data) {
+
+                        $('#unitcost').val(data);
+
+                },
+
+            });
+        }
+
+    </script>

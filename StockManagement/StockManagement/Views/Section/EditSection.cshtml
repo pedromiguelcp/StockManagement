@@ -1,0 +1,55 @@
+﻿@model StockManagement.Models.SectionModel
+
+@{
+    if (ViewBag.Message == "Section not edited")
+    {
+        <div class="alert alert-warning" role="alert">
+            <button type="button" class="close" style="color:red" data-dismiss="alert">
+                x
+            </button>
+            This Section name already exist, please choose a diferent one!
+        </div>
+        ViewBag.Message = "";
+    }
+    ViewBag.Title = "Edit Section";
+}
+
+<h2>Edit Section</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name_Section, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name_Section, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name_Section, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description_Section, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description_Section, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nada a registar" } })
+                @Html.ValidationMessageFor(model => model.Description_Section, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a href="@Url.Action("ViewSections", "Section")" class="btn btn-default btn-md">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back</span>
+            </a>
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

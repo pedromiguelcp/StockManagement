@@ -1,0 +1,26 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Rename
+       [dbo].[Client].[Id_Integrator] (Column)
+       [dbo].[Client].[Name_Integrator] (Column)
+       [dbo].[Client].[Phone_Integrator] (Column)
+       [dbo].[Client].[Mail_Integrator] (Column)
+       [dbo].[Client].[Address_Integrator] (Column)
+       [dbo].[Client].[Nif_Integrator] (Column)
+     Create
+       [dbo].[Integrator] (Table)
+       Default Constraint: unnamed constraint on [dbo].[Integrator] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Integrator] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Integrator] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Integrator] (Default Constraint)
+
+** Supporting actions

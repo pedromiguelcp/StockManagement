@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StockManagement.Models.ViewMachineModel>
+
+@{
+    ViewBag.Title = "List of Machines";
+}
+
+<h2>List of Machines</h2>
+
+<a href="@Url.Action("CreateMachine", "Machine")" class="btn btn-success btn-md">
+    <i class="fas fa-plus"></i>
+    <span>New</span>
+</a>
+<br />
+<br />
+<h4>
+    <i class="fas fa-filter fa-1x"></i>
+    Project
+</h4>
+
+@Html.DropDownList("Sortby", new SelectList(DataLibrary.BusinessLogic.ProjectProcessor.LoadProjects().OrderBy(x => x.Name_Project), "Id_Project", "Name_Project"), "< Filter by Project >", new { @class = "form-control", @onchange = "CallChangefunc(this.Id_Project)" })
+
+<script>
+    function CallChangefunc(val) {
+        debugger;
+        var id = $("#Sortby").val();
+        $.ajax({
+        url: "/Machine/_TableMachineaux?id=" + id,
+        type: "POST",
+        data: '{"id":"' + id + '"}',
+        success: function (data) {
+            $("#partial").html(data);
+        }
+        });
+    }
+</script>
+<br />
+
+<div id="partial">
+    @{ Html.RenderAction("_TableMachine");}
+</div>
+
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-default btn-md">
+    <i class="fas fa-arrow-left"></i>
+    <span>Back</span>
+</a>

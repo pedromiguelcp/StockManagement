@@ -1,0 +1,42 @@
+﻿@model StockManagement.Models.SectionModel
+
+@{
+    ViewBag.Title = "Delete Section";
+}
+
+<h2>Delete Section</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_Section)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_Section)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description_Section)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description_Section)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <a href="@Url.Action("ViewSections", "Section")" class="btn btn-default btn-md">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back</span>
+    </a>
+    <input type="submit" value="Delete" class="btn btn-danger" />
+</div>
+    }
+</div>

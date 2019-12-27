@@ -1,0 +1,48 @@
+﻿@model IEnumerable<StockManagement.Models.ViewStockMaterialModel>
+
+@{
+    ViewBag.Title = "List of Stock Material";
+}
+
+<h2>List of Stock Materials</h2>
+
+<a href="@Url.Action("CreateStockMaterial", "StockMaterial")" class="btn btn-success btn-md">
+    <i class="fas fa-plus"></i>
+    <span>New</span>
+</a>
+<br />
+<br />
+<h4>
+    <i class="fas fa-filter fa-1x"></i>
+    Section
+</h4>
+
+@Html.DropDownList("Sortby", new SelectList(DataLibrary.BusinessLogic.SectionProcessor.LoadSections().OrderBy(x => x.Name_Section), "Id_Section", "Name_Section"), "< Filter by Section >", new { @class = "form-control", @onchange = "CallChangefunc(this.Id_Section)" })
+
+<script>
+    function CallChangefunc(val) {
+        debugger;
+        var id = $("#Sortby").val();
+        $.ajax({
+        url: "/StockMaterial/_TableStockMaterialaux?id=" + id,
+        type: "POST",
+        data: '{"id":"' + id + '"}',
+        success: function (data) {
+            $("#partial").html(data);
+        }
+        });
+    }
+</script>
+<br />
+
+
+<div id="partial">
+    @{ Html.RenderAction("_TableStockMaterial");}
+</div>
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-default btn-md">
+    <i class="fas fa-arrow-left"></i>
+    <span>Back</span>
+</a>
+
+

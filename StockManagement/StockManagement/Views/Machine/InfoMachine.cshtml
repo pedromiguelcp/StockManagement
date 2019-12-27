@@ -1,0 +1,166 @@
+﻿@model StockManagement.Models.ProjectStockMachineMaterialModel
+
+@{
+    if (ViewBag.Message == "Incorrect Assign")
+    {
+    <div class="alert alert-warning" role="alert">
+        <button type="button" class="close" style="color:red" data-dismiss="alert">
+            x
+        </button>
+        This material is Priority for another machine, you can do that assign anyway. Choose wisely.!
+    </div>
+        ViewBag.Message = "";
+    }
+    ViewBag.Title = "InfoMachine";
+}
+
+<h2>Machine Overview</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MachineModel.Name_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MachineModel.Name_Machine, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.MachineModel.Name_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.MachineModel.Description_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MachineModel.Description_Machine, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.MachineModel.Description_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MachineModel.TotalCost_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MachineModel.TotalCost_Machine, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.MachineModel.TotalCost_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div align="center">
+
+        </div>
+        <br />
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewStockMachineMaterialModel[0].Name_Material)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewStockMachineMaterialModel[0].Amount_Material)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewStockMachineMaterialModel[0].Cost_Material)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewStockMachineMaterialModel[0].Observations)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewStockMachineMaterialModel[0].Priority)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewStockMachineMaterialModel[0].MissingMaterial)
+                </th>
+                <th>
+                    Material in Stock
+                </th>
+                <th>
+                    Assign Material to Machine
+                </th>
+            </tr>
+
+            @foreach (var item in Model.ViewStockMachineMaterialModel)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name_Material)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount_Material)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cost_Material)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Observations)
+                    </td>
+                    @if (item.Priority == true)
+                    {
+                        <td align="center">
+                            <i class="fas fa-check fa-1x" style="color:green"></i>
+                        </td>
+                    }
+                    else
+                    {
+                        <td align="center">
+                            <i class="fas fa-times fa-1x" style="color:red"></i>
+                        </td>
+                    }
+
+                    @if (item.MissingMaterial != 0)
+                    {
+                        <td style="background-color:gold">
+                            @Html.DisplayFor(modelItem => item.MissingMaterial)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MissingMaterial)
+                        </td>
+                    }
+
+
+                    @if ((item.AmountinStock == 0) || (item.MissingMaterial > item.AmountinStock))
+                    {
+                        <td style="background-color:crimson">
+                            @Html.DisplayFor(modelItem => item.AmountinStock)
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="background-color:skyblue">
+                            @Html.DisplayFor(modelItem => item.AmountinStock)
+                        </td>
+                    }
+                    @if (item.MissingMaterial > 0 & item.AmountinStock > 0)
+                    {
+                        <td>
+                            <div align="center">
+                                @Html.EditorFor(m => item.StocktoMachine, new { @type = "number", min = 0, step = "1", disable = "disable" })
+                                <a href="@Url.Action("InfoMachineaux", "Machine",new { Name_Machine = item.Name_Machine, Name_Material = item.Name_Material})" class="btn btn-success btn-md">
+                                    <span>Assign</span>
+                                </a>
+                            </div>
+
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+        <hr />
+        <div class="form-group">
+            <a href="@Url.Action("ViewMachines", "Machine")" class="btn btn-default btn-md">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back</span>
+            </a>
+        </div>
+    </div>
+}
+

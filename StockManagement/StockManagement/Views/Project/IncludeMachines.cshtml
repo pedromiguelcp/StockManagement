@@ -1,0 +1,136 @@
+﻿@model StockManagement.Models.ProjectMachineMaterialModel
+
+@{
+    if (ViewBag.Message == "Machine not included")
+    {
+        <div class="alert alert-warning" role="alert">
+            <button type="button" class="close" style="color:red" data-dismiss="alert">
+                x
+            </button>
+            This Machine name already exist, please choose a diferent one!
+        </div>
+        ViewBag.Message = "";
+    }
+    ViewBag.Title = "Include Machines";
+}
+
+<h2>Machine Features</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.MachineModel.Name_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MachineModel.Name_Machine, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MachineModel.Name_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MachineModel.Description_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MachineModel.Description_Machine, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nada a registar" } })
+                @Html.ValidationMessageFor(model => model.MachineModel.Description_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MachineModel.TotalCost_Machine, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MachineModel.TotalCost_Machine, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.MachineModel.TotalCost_Machine, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div align="center">
+
+            <input type="submit" style="border-color:forestgreen" value="Include Materials to Machine" class="btn btn-group-justified" formaction="@Url.Action("IncludeMachinesMaterialsAux", "Project")" />
+        </div>
+
+        <br />
+        <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Id_Provider)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Name_Material)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Amount_Material)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Unit_Cost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Cost_Material)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].MissingMaterial)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Observations)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ViewMachineMaterialModel[0].Request)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.ViewMachineMaterialModel)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => DataLibrary.BusinessLogic.ProviderProcessor.LoadProviderById( item.Id_Provider).Name_Provider)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name_Material)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount_Material)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Unit_Cost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cost_Material)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MissingMaterial)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Observations)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Request)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("EditMachineMaterial", "Project", new {Name_Material = item.Name_Material})" class="btn btn-info btn-md">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a href="@Url.Action("DeleteMachineMaterial", "Project", new { Name_Material = item.Name_Material})" class="btn btn-danger btn-md">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <hr />
+        <div class="form-group">
+
+            <a href="@Url.Action("DiscardCreateMachine", "Project")" class="btn btn-default btn-md">
+                <i class="fas fa-arrow-left"></i>
+                <span>Discard</span>
+            </a>
+            <input type="submit" value="Include" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
